@@ -1,11 +1,8 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-# Activate the virtual environment
-if [ ! -f pip-selfcheck.json ]; then
-  virtualenv .
-fi
+# invoke virtualenv (need to call function in current shell context)
+. ./setup.sh; activate
 
-source bin/activate
 pip install -r requirements.txt
 
 # Start server

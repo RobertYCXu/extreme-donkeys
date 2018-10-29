@@ -2,7 +2,7 @@
 
 ### Getting started
 
-Make sure you have Python 2.7 and Pip installed. Run `./start.sh` to enter the virtual environment and start the server on http://127.0.0.1:5000/.
+Make sure you have Python 2.7 and Pip installed. Run `source ./start.sh` to enter the virtual environment and start the server on http://127.0.0.1:5000/.
 
 ### Adding dependencies
 
