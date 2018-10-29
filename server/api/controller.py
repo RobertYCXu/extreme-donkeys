@@ -1,6 +1,6 @@
 from flask import Flask
 from models import Game
-from api import app
+from api import app, socketio
 
 global games
 games = {}
@@ -20,3 +20,7 @@ def get_game(key):
   game = games[key]
   output += game.serialize() + '\n'
   return output
+
+@socketio.on('message')
+def handle_message(message):
+  print('received message: ' + message)

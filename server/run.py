@@ -1,2 +1,4 @@
-from api import app
-app.run(debug=True)
+from api import app, socketio
+
+if __name__ == '__main__':
+  socketio.run(app)
