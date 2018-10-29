@@ -7,3 +7,7 @@ Make sure you have Python 2.7 and Pip installed. Run `source ./start.sh` to ente
 ### Adding dependencies
 
 When adding dependencies, make sure to run `pip freeze > requirements.txt` before committing to the repo.
+
+### Deployment
+
+Currently deployed on http://yanske1.pythonanywhere.com
