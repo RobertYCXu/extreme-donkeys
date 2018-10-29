@@ -1,5 +1,5 @@
 from flask import Flask, request
-
+from flask_socketio import emit, send, join_room, leave_room
 from models import Game, User
 from api import app, socketio
 import json
@@ -12,9 +12,8 @@ def index():
   return 'Hello, World!'
 
 @app.route('/game/<key>', methods=["post"])
-def join_game(key):
+def enter_game(key):
   debug = ""
-  data = request.json
 
   # Get or create game
   if key not in games:
@@ -23,19 +22,16 @@ def join_game(key):
   
   game = games[key]
 
-  # Create player
-  if "user" not in data:
-    debug += "invalid data!"
-    return debug
-
-  user = User(data["user"])
-  if not game.add_user(user):
-    debug += "failed to add"
-    return debug
-
   debug += game.serialize() + '\n'
   return debug
 
-@socketio.on('message')
-def handle_message(message):
-  print('received message: ' + message)
+@socketio.on('join')
+def join_game(data):
+  game = games[data["key"]]
+  user = User(data["user"])
+  
+  if game.add_user(user):
+    join_room(game.key)
+    emit("new_user", {"user": user.name}, room=game.key)
+  else:
+    emit("new_user", "failed")
