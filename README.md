@@ -1,2 +1,4 @@
 # extreme-donkeys
-A multiplayer game.
+A multi-player game.
+
+Don't donkey around.
