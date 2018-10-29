@@ -6,4 +6,4 @@
 pip install -r requirements.txt
 
 # Start server
-python run.py
+python flask_app.py
