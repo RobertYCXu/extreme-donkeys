@@ -11,7 +11,7 @@ games = {}
 def index():
   return 'Hello, World!'
 
-@app.route('/game/<key>', methods=["post"])
+@app.route('/game/<key>', methods=["get", "post"])
 def enter_game(key):
   debug = ""
 
