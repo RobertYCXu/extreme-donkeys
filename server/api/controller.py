@@ -32,6 +32,24 @@ def join_game(data):
   
   if game.add_user(user):
     join_room(game.key)
-    emit("new_user", {"user": user.name}, room=game.key)
+    emit("new_user", {"user": user.name}, room = game.key)
   else:
     emit("new_user", "failed")
+
+@socketio.on('leave')
+def leave_game(data):
+  game = games[data["key"]]
+
+  if game.remove_user(data["user"]):
+    leave_room(game.key)
+    emit("user_left", {"user": data["user"]}, room = game.key)
+
+    if game.num_users <= 0:
+      del games[game.key]
+
+@socketio.on('update')
+def update(data):
+  game = games[data["key"]]
+  
+  # Just bounce the data to the room for now
+  emit("update", data, room = game.key)

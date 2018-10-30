@@ -10,6 +10,15 @@ class Game:
 
     self.user[user.name] = user
     return True
+  
+  def remove_user(self, username):
+    if username not in self.user:
+      return False
+    
+    del self.user[username]
+
+  def num_users(self):
+    return len(self.user)
 
   def serialize(self):
     body = self.key + '\n'
